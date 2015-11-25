@@ -1,4 +1,4 @@
-data = "3430689156"
+data = "30430436189156"
 
 def read_tag(data):
     tag = data[0]
