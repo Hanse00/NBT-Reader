@@ -1,4 +1,10 @@
+from enum import Enum
+
 data = "30430436189156"
+
+class TagType(Enum):
+    compound = 0
+    end = 1
 
 class Tag(object):
     def __init__(self, data):
@@ -23,11 +29,11 @@ def read_tags(data):
     while len(data) > 0:
         tag, data = Tag.get_tag_from_data(data)
 
-        if tag.data == "0":
+        if tag.data == str(TagType.compound.value):
             print "compound"
             new_tags, data = read_tags(data)
             tag_list.append(Tag(new_tags))
-        elif tag.data == "1":
+        elif tag.data == str(TagType.end.value):
             print "end"
             return tag_list, data
         else:
