@@ -1,6 +1,10 @@
 from enum import Enum
+import file_reader
 
-data = "30430436189156"
+test_file_path = "/Applications/MultiMC.app/Contents/MacOS/instances/SRP Test/minecraft/saves/New World/level.dat"
+test_date = file_reader.read_gzipped_file(test_file_path)
+
+print(test_date)
 
 class TagType(Enum):
     compound = 0

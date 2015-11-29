@@ -1,2 +1,5 @@
 # Don't sync virtualenv
 venv/
+
+# Python cache
+__pycache__/
