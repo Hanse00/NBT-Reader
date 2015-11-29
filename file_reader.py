@@ -1,5 +1,4 @@
 import gzip
-import binascii
 
 def read_gzipped_file(file_path):
     byte_list = []
