@@ -1,3 +1,6 @@
+import struct
+import file_reader
+
 data_string = "1231235123123123123513123"
 
 class data(object):
@@ -18,5 +21,19 @@ class data(object):
 
 data_container = data(data_string)
 
-for x in data_container:
-    print(x)
+#for x in data_container:
+#    print(x)
+
+test_file_path = "/Applications/MultiMC.app/Contents/MacOS/instances/SRP Test/minecraft/saves/New World/level.dat"
+
+data =  file_reader.read_gzipped_file(test_file_path)
+
+print(data)
+
+relevant_data = data[23:23 + 8]
+
+relevant_data_string = b''.join(relevant_data)
+
+number = struct.unpack(">q", relevant_data_string)
+
+print(number)
