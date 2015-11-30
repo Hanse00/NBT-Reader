@@ -30,4 +30,8 @@ class ByteContainer(object):
         data = self._retrieve_n_bytes(n)
         self._remove_n_bytes(n)
 
+        # If data has length 1, return the value itself rather than
+        # a list of length 1
+        if n == 1:
+            data = data[0]
         return data
