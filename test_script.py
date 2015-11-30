@@ -10,20 +10,32 @@ class RawData(object):
     def __str__(self):
         return str(self.data)
 
-    def get_single(self, index):
-        return self.data.pop(index)
+    def _is_valid_index(self, index):
+        if not type(index) is int:
+            error = "Index must be an integer"
+            raise ValueError(error)
 
-    def get_range(self, start_index, end_index):
-        return_data = self.data[start_index:end_index]
-        del self.data[start_index:end_index]
-        return return_data
+        # Check that it's within the valid range 0 < index < (length of data)
+        if not (index >= 0) or not (index < len(self.data)):
+            error = "Index out of range. Index: {}, Valid range: 0, {}".format(
+                index, len(self.data) - 1)
+            raise ValueError(error)
+
+        return True
+
+    def get(self, start_index, end_index=None):
+        self._is_valid_index(start_index)
+        if end_index:
+            self._is_valid_index(end_index)
+
+        return "Indexes are valid!"
 
 data_object = RawData(data_list)
 print(data_object)
-print(data_object.get_single(0))
+print(data_object.get(0))
 print(data_object)
-print(data_object.get_range(1,3))
-print(data_object)
+print(data_object.get(0,3))
+
 
 
 
