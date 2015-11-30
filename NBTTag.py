@@ -19,4 +19,7 @@ class TagType(Enum):
     Int_Array = 11
 
 class NBTTag(object):
-    pass
+    def __init__(self, tag_type, tag_name, tag_data):
+        self.tag_type = tag_type
+        self.tag_name = tag_name
+        self.tag_data = tag_data
