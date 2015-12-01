@@ -24,6 +24,9 @@ class ByteContainer(object):
     def _remove_n_bytes(self, n):
         del self.data[0:n]
 
+    def __len__(self):
+        return len(self.data)
+
     # Get the next n bytes, removing them from the object data
     def get(self, n):
         self._validate_number(n)
