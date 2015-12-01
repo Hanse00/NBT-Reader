@@ -17,18 +17,24 @@ class NBTTag(object):
         length_bytes = bytecontainer.get(2)
         name_length = bytereader.get_short_from_bytes(length_bytes)
 
+        if name_length == 0:
+            return None
+
         name_bytes = bytecontainer.get(name_length)
         name = bytereader.get_string_from_bytes(name_bytes)
         return name
 
     @classmethod
     def get_tag_from_byte_container(cls, bytecontainer):
-        #TODO: Check if this is a valid tag type
-        tag_type = TagType.get_from_byte(bytecontainer.get(1))
+        type_byte = bytecontainer.get(1)
+        if not TagType.is_valid_type(type_byte):
+            error = "Start byte for tag not valid. Byte:'{}'".format(type_byte)
+            raise ValueError(error)
+
+        tag_type = TagType.get_from_byte(type_byte)
         if tag_type == TagType.type_end:
             return cls(tag_type)
 
-        #TODO: Name of length 0 is possible, code does not allow it
         tag_name = cls._get_name_from_bytecontainer(bytecontainer)
 
         #TODO: Read in the various data types

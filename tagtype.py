@@ -19,3 +19,8 @@ class TagType(Enum):
         byte_value = ord(data_byte)
         tag_type = cls(byte_value)
         return tag_type
+
+    # Check if the byte given is a valid member of the possible tag types
+    @classmethod
+    def is_valid_type(cls, data_byte):
+        return ord(data_byte) in [member.value for member in cls]
